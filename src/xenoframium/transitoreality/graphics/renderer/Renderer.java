@@ -20,12 +20,12 @@ public class Renderer {
         modelMatrices.push(new Matrix4());
     }
 
-    private void addModelMatrix(Renderable renderable) {
-        modelMatrices.push(new Matrix4(modelMatrices.peek()).multiply(renderable.getModelMatrix()));
+    private Matrix4 calculateChildModelMatrix(Renderable renderable) {
+        return new Matrix4(modelMatrices.peek()).multiply(renderable.getModelMatrix());
     }
 
     public void renderObject(Renderable renderable) {
-        addModelMatrix(renderable);
+        modelMatrices.push(calculateChildModelMatrix(renderable));
         renderable.render(this);
         modelMatrices.pop();
     }
