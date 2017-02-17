@@ -4,10 +4,7 @@ import xenoframium.transitoreality.gl.ShaderAttribute;
 import xenoframium.transitoreality.gl.Texture;
 import xenoframium.transitoreality.gl.Vao;
 import xenoframium.transitoreality.gl.Vbo;
-import xenoframium.transitoreality.gl.Window;
-import xenoframium.transitoreality.graphics.Camera;
-import xenoframium.transitoreality.graphics.Projection;
-import xenoframium.transitoreality.graphics.renderables.Renderable;
+import xenoframium.transitoreality.graphics.renderer.Renderer;
 
 public class TextureComponent implements RenderComponent{
 	private final Texture texture;
@@ -19,7 +16,7 @@ public class TextureComponent implements RenderComponent{
 	}
 	
 	@Override
-	public void onRender(Window window, Camera camera, Projection projection, Renderable renderable) {
+	public void onRender(Renderer renderer) {
 		texture.bind();
 	}
 

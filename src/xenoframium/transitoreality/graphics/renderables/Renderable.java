@@ -1,13 +1,11 @@
 package xenoframium.transitoreality.graphics.renderables;
 
 import xenoframium.glmath.linearalgebra.Matrix4;
-import xenoframium.transitoreality.gl.Window;
-import xenoframium.transitoreality.graphics.Camera;
-import xenoframium.transitoreality.graphics.Projection;
+import xenoframium.transitoreality.graphics.renderer.Renderer;
 
 public interface Renderable {
-	public void render(Window window, Camera camera, Projection projection);
+	void render(Renderer renderer);
 	
-	public Matrix4 getModelMatrix();
-	public void setModelMatrix(Matrix4 newModelMatrix);
+	Matrix4 getModelMatrix();
+	void setModelMatrix(Matrix4 newModelMatrix);
 }

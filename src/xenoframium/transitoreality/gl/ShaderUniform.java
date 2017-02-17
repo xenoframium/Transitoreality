@@ -1,7 +1,7 @@
 package xenoframium.transitoreality.gl;
 
 public enum ShaderUniform {
-	MVP_MATRIX("mvp_matrix"), NON("NON");
+	MVP_MATRIX("mvp_matrix"), COLOUR("colour");
 	
 	private String name;
 	
@@ -9,7 +9,7 @@ public enum ShaderUniform {
 		return name;
 	}
 	
-	private ShaderUniform(String name) {
+	ShaderUniform(String name) {
 		this.name = name;
 	}
 }

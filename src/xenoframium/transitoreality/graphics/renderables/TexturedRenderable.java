@@ -1,18 +1,16 @@
 package xenoframium.transitoreality.graphics.renderables;
 
-import java.io.File;
-
 import xenoframium.glmath.linearalgebra.Matrix4;
 import xenoframium.transitoreality.gl.ShaderProgram;
 import xenoframium.transitoreality.gl.Texture;
 import xenoframium.transitoreality.gl.Vao;
-import xenoframium.transitoreality.gl.Window;
-import xenoframium.transitoreality.graphics.Camera;
-import xenoframium.transitoreality.graphics.Projection;
 import xenoframium.transitoreality.graphics.rendercomponents.MVPComponent;
 import xenoframium.transitoreality.graphics.rendercomponents.TextureComponent;
 import xenoframium.transitoreality.graphics.rendercomponents.TriangleDrawComponent;
+import xenoframium.transitoreality.graphics.renderer.Renderer;
 import xenoframium.transitoreality.util.FileUtil;
+
+import java.io.File;
 
 public class TexturedRenderable implements Renderable {
 	private static final File VERTEX_SHADER_FILE = FileUtil.getWorkingDirFile("shaders/texturedVertexShader.glsl");
@@ -41,13 +39,12 @@ public class TexturedRenderable implements Renderable {
 	}
 
 	@Override
-	public void render(Window window, Camera camera, Projection projection) {
+	public void render(Renderer renderer) {
 		shaderProgram.use();
-		vao.bind();
-		
-		mvpComponent.onRender(window, camera, projection, this);
-		textureComponent.onRender(window, camera, projection, this);
-		vertexComponent.onRender(window, camera, projection, this);
+
+		mvpComponent.onRender(renderer);
+		textureComponent.onRender(renderer);
+		vertexComponent.onRender(renderer);
 	}
 
 	@Override

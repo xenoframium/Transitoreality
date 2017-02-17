@@ -1,16 +1,9 @@
 package xenoframium.transitoreality.graphics.rendercomponents;
 
 import xenoframium.glmath.GLM;
-import xenoframium.glmath.linearalgebra.Line3f;
-import xenoframium.glmath.linearalgebra.Matrix4;
-import xenoframium.glmath.linearalgebra.Triangle;
-import xenoframium.glmath.linearalgebra.Vector3;
-import xenoframium.glmath.linearalgebra.Vector4;
-import xenoframium.transitoreality.gl.Window;
-import xenoframium.transitoreality.graphics.Camera;
-import xenoframium.transitoreality.graphics.Projection;
+import xenoframium.glmath.linearalgebra.*;
 import xenoframium.transitoreality.graphics.Selectable;
-import xenoframium.transitoreality.graphics.renderables.Renderable;
+import xenoframium.transitoreality.graphics.renderer.Renderer;
 
 public class SelectionComponent implements RenderComponent{
 	private final Selectable selectable;
@@ -32,13 +25,16 @@ public class SelectionComponent implements RenderComponent{
 		}
 	}
 	
-	private Line3f getMouseRay(Window window, Camera camera, Projection projection, Renderable renderable) {
-		Matrix4 modelMatrix = renderable.getModelMatrix();
-		Matrix4 viewMatrix = camera.getViewMatrix().toMatrix4();
-		Matrix4 projectionMatrix = projection.getProjectionMatrix().toMatrix4();
-		Matrix4 inverseMVP = projectionMatrix.multiply(viewMatrix).multiply(modelMatrix).inverse();
-		
-		Vector4 mousePos = new Vector4(window.getMouseXPos(), window.getMouseYPos(), projection.getNear(), 0);
+	private Line3f getMouseRay(Renderer renderer) {
+		Matrix4 viewMatrix = renderer.getCamera().getViewMatrix();
+		Matrix4 projectionMatrix = renderer.getProjection().getProjectionMatrix();
+		Matrix4 inverseMVP = projectionMatrix.multiply(viewMatrix).multiply(renderer.getModelMatrix()).inverse();
+
+		float mouseXPos = renderer.getWindow().getMouseXPos();
+		float mouseYPos = renderer.getWindow().getMouseYPos();
+		float nearPlane = renderer.getProjection().getNear();
+
+		Vector4 mousePos = new Vector4(mouseXPos, mouseYPos, nearPlane, 0);
 		mousePos = inverseMVP.multiply(mousePos);
 		Vector3 mousePosFront = new Vector3(mousePos.x, mousePos.y, 0);
 		Vector3 mousePosBack = new Vector3(mousePos.x, mousePos.y, 1);
@@ -47,11 +43,11 @@ public class SelectionComponent implements RenderComponent{
 	}
 	
 	@Override
-	public void onRender(Window window, Camera camera, Projection projection, Renderable renderable) {
-		Line3f ray = getMouseRay(window, camera, projection, renderable);
+	public void onRender(Renderer renderer) {
+		Line3f ray = getMouseRay(renderer);
 		for (Triangle triangle : triangles) {
 			if (GLM.doesLineIntersectTriangle(ray, triangle)) {
-				selectable.onSelection(window, camera, projection, renderable);
+				selectable.onSelection();
 				return;
 			}
 		}

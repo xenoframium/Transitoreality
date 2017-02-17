@@ -1,15 +1,12 @@
 package xenoframium.transitoreality.graphics.rendercomponents;
 
-import static org.lwjgl.opengl.GL20.*;
-
 import xenoframium.glmath.linearalgebra.Matrix4;
 import xenoframium.transitoreality.gl.ShaderProgram;
 import xenoframium.transitoreality.gl.ShaderUniform;
 import xenoframium.transitoreality.gl.Uniform;
-import xenoframium.transitoreality.gl.Window;
-import xenoframium.transitoreality.graphics.Camera;
-import xenoframium.transitoreality.graphics.Projection;
-import xenoframium.transitoreality.graphics.renderables.Renderable;
+import xenoframium.transitoreality.graphics.renderer.Renderer;
+
+import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 
 public class MVPComponent implements RenderComponent{
 	private final ShaderProgram shaderProgram;
@@ -21,9 +18,9 @@ public class MVPComponent implements RenderComponent{
 	}
 	
 	@Override
-	public void onRender(Window window, Camera camera, Projection projection, Renderable renderable) {
-		Matrix4 mvpMatrix = projection.getProjectionMatrix().toMatrix4();
-		mvpMatrix.multiply(camera.getViewMatrix().toMatrix4()).multiply(renderable.getModelMatrix());
+	public void onRender(Renderer renderer) {
+		Matrix4 mvpMatrix = renderer.getProjection().getProjectionMatrix();
+		mvpMatrix.multiply(renderer.getCamera().getViewMatrix()).multiply(renderer.getModelMatrix());
 
 		glUniformMatrix4fv(mvpLocation.getLocation(), false, mvpMatrix.asBuffer());
 	}

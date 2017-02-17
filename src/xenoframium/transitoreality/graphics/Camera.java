@@ -3,6 +3,7 @@ package xenoframium.transitoreality.graphics;
 import xenoframium.glmath.GLM;
 import xenoframium.glmath.linearalgebra.ImmutableMatrix4;
 import xenoframium.glmath.linearalgebra.ImmutableVector3;
+import xenoframium.glmath.linearalgebra.Matrix4;
 import xenoframium.glmath.linearalgebra.Vector3;
 
 //Cameras are immutable
@@ -21,19 +22,19 @@ public class Camera {
 		viewMatrix = GLM.cameraLookAt(cameraPosition, viewTarget, upVector).toImmutableMatrix4();
 	}
 
-	public ImmutableVector3 getPosition() {
-		return position;
+	public Vector3 getPosition() {
+		return position.toVector3();
 	}
 
-	public ImmutableVector3 getTarget() {
-		return target;
+	public Vector3 getTarget() {
+		return target.toVector3();
 	}
 
-	public ImmutableVector3 getUpVector() {
-		return up;
+	public Vector3 getUpVector() {
+		return up.toVector3();
 	}
 
-	public ImmutableMatrix4 getViewMatrix() {
-		return viewMatrix;
+	public Matrix4 getViewMatrix() {
+		return viewMatrix.toMatrix4();
 	}
 }
