@@ -4,7 +4,7 @@ import xenoframium.glmath.linearalgebra.Matrix4;
 import xenoframium.transitoreality.gl.ShaderProgram;
 import xenoframium.transitoreality.gl.ShaderUniform;
 import xenoframium.transitoreality.gl.Uniform;
-import xenoframium.transitoreality.graphics.renderer.Renderer;
+import xenoframium.transitoreality.graphics.Renderer;
 
 import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 

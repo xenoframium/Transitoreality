@@ -4,7 +4,7 @@ import xenoframium.transitoreality.gl.ShaderAttribute;
 import xenoframium.transitoreality.gl.Texture;
 import xenoframium.transitoreality.gl.Vao;
 import xenoframium.transitoreality.gl.Vbo;
-import xenoframium.transitoreality.graphics.renderer.Renderer;
+import xenoframium.transitoreality.graphics.Renderer;
 
 public class TextureComponent implements RenderComponent{
 	private final Texture texture;

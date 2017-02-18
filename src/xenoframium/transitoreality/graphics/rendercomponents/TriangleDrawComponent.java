@@ -3,7 +3,7 @@ package xenoframium.transitoreality.graphics.rendercomponents;
 import xenoframium.transitoreality.gl.ShaderAttribute;
 import xenoframium.transitoreality.gl.Vao;
 import xenoframium.transitoreality.gl.Vbo;
-import xenoframium.transitoreality.graphics.renderer.Renderer;
+import xenoframium.transitoreality.graphics.Renderer;
 
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.glDrawArrays;

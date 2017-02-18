@@ -3,7 +3,7 @@ package xenoframium.transitoreality.graphics.rendercomponents;
 import xenoframium.glmath.GLM;
 import xenoframium.glmath.linearalgebra.*;
 import xenoframium.transitoreality.graphics.Selectable;
-import xenoframium.transitoreality.graphics.renderer.Renderer;
+import xenoframium.transitoreality.graphics.Renderer;
 
 public class SelectionComponent implements RenderComponent{
 	private final Selectable selectable;

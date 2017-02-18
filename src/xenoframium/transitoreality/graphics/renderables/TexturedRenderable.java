@@ -7,7 +7,7 @@ import xenoframium.transitoreality.gl.Vao;
 import xenoframium.transitoreality.graphics.rendercomponents.MVPComponent;
 import xenoframium.transitoreality.graphics.rendercomponents.TextureComponent;
 import xenoframium.transitoreality.graphics.rendercomponents.TriangleDrawComponent;
-import xenoframium.transitoreality.graphics.renderer.Renderer;
+import xenoframium.transitoreality.graphics.Renderer;
 
 public class TexturedRenderable implements Renderable {
 	private static final ShaderProgram shaderProgram = ShaderProgram.TEXTURED_SHADER_PROGRAM;

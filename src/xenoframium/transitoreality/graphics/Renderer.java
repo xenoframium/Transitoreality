@@ -1,4 +1,4 @@
-package xenoframium.transitoreality.graphics.renderer;
+package xenoframium.transitoreality.graphics;
 
 import xenoframium.glmath.linearalgebra.Matrix4;
 import xenoframium.transitoreality.datastructures.Stack;

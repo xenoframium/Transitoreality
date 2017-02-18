@@ -1,7 +1,7 @@
 package xenoframium.transitoreality.graphics.renderables;
 
 import xenoframium.glmath.linearalgebra.Matrix4;
-import xenoframium.transitoreality.graphics.renderer.Renderer;
+import xenoframium.transitoreality.graphics.Renderer;
 
 import java.util.Collection;
 import java.util.HashSet;
