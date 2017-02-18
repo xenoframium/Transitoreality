@@ -1,52 +1,35 @@
 package xenoframium.transitoreality.gl;
 
-import static org.lwjgl.opengl.GL20.*;
-
-import java.io.File;
-import java.io.IOException;
-
 import xenoframium.glwrapper.GlProgram;
-import xenoframium.glwrapper.GlShader;
 
 public class ShaderProgram {
+    public static final ShaderProgram TEXTURED_SHADER_PROGRAM = new ShaderProgram(VertexShader.TEXTURED_VERTEX_SHADER, FragmentShader.TEXTURED_FRAGMENT_SHADER);
+
 	private final GlProgram glProgram;
 
-	private final String vertexShaderPath;
-	private final String fragmentShaderPath;
+	private final VertexShader vertexShader;
+	private final FragmentShader fragmentShader;
 
-	public ShaderProgram(File vertexShaderFile, File fragmentShaderFile) {
-		vertexShaderPath = vertexShaderFile.getAbsolutePath();
-		fragmentShaderPath = fragmentShaderFile.getAbsolutePath();
-		
-		GlShader vertexShader;
-		GlShader fragmentShader;
-		try {
-			vertexShader = new GlShader(GL_VERTEX_SHADER, vertexShaderFile);
-		} catch (IOException exception) {
-			throw new ShaderIOException(vertexShaderFile);
-		}
-		try {
-			fragmentShader = new GlShader(GL_FRAGMENT_SHADER, fragmentShaderFile);
-		} catch (IOException exception) {
-			throw new ShaderIOException(fragmentShaderFile);
-		}
-		
-		glProgram = new GlProgram(vertexShader, fragmentShader);
+	public ShaderProgram(VertexShader vertexShader, FragmentShader fragmentShader) {
+	    this.vertexShader = vertexShader;
+	    this.fragmentShader = fragmentShader;
+
+		glProgram = new GlProgram(vertexShader.getShader(), fragmentShader.getShader());
 	}
 
 	public void use() {
 		glProgram.use();
 	}
 
-	protected String getVertexShaderPath() {
-		return vertexShaderPath;
+	VertexShader getVertexShader() {
+		return vertexShader;
 	}
 	
-	protected String getFragmentShaderPath() {
-		return fragmentShaderPath;
+	FragmentShader getFragmentShader() {
+		return fragmentShader;
 	}
 
-	protected GlProgram getProgram() {
+	GlProgram getProgram() {
 		return glProgram;
 	}
 }

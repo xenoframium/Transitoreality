@@ -8,21 +8,11 @@ import xenoframium.transitoreality.graphics.rendercomponents.MVPComponent;
 import xenoframium.transitoreality.graphics.rendercomponents.TextureComponent;
 import xenoframium.transitoreality.graphics.rendercomponents.TriangleDrawComponent;
 import xenoframium.transitoreality.graphics.renderer.Renderer;
-import xenoframium.transitoreality.util.FileUtil;
-
-import java.io.File;
 
 public class TexturedRenderable implements Renderable {
-	private static final File VERTEX_SHADER_FILE = FileUtil.getWorkingDirFile("shaders/texturedVertexShader.glsl");
-	private static final File FRAGMENT_SHADER_FILE = FileUtil.getWorkingDirFile("shaders/texturedFragmentShader.glsl");
-
-	private static final ShaderProgram shaderProgram;
+	private static final ShaderProgram shaderProgram = ShaderProgram.TEXTURED_SHADER_PROGRAM;
 
 	private final Vao vao;
-
-	static {
-		shaderProgram = new ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE);
-	}
 
 	private final MVPComponent mvpComponent;
 	private final TextureComponent textureComponent;
