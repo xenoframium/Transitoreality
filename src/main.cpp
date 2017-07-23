@@ -86,10 +86,10 @@ int main(int argc, const char * argv[]) {
 
     Entity entity = entityAssembler.assembleEntity("config/entities/TurquoiseFloorTile.entity");
 
-    Entity entity2 = em.createEntity();
+    /*Entity entity2 = em.createEntity();
     entity2.addComponent<TransformComponent>();
     entity2.addComponent<TexturedRenderable>(TexturedRenderable::createRenderable(points2, uvs2, texture2));
-    entity2.getComponent<TransformComponent>()->parent = &world;
+    entity2.getComponent<TransformComponent>()->parent = &world;*/
 
 
     glm::vec3 axis(0, 1, 0);

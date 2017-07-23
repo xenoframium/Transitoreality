@@ -101,7 +101,8 @@ TexturedRenderable TexturedRenderable::createRenderable(const std::vector<float>
     vao->addAttribPointer(posVBO, 0, 3, GL_FLOAT);
     vao->addAttribPointer(uvVBO, 1, 2, GL_FLOAT);
 
-    return TexturedRenderable(renderMode, 0, (GLsizei) vertices.size(), vao, texture);
+    const int VERTEX_DIMENSIONS = 3;
+    return TexturedRenderable(renderMode, 0, ((GLsizei) vertices.size()) / VERTEX_DIMENSIONS, vao, texture);
 }
 
 TexturedRenderSystem::TexturedRenderSystem(Camera &camera, Projection &projection) : camera(camera), projection(projection){

@@ -1,14 +1,16 @@
-Name: "TurquoiseFloorTile.entity";
+Name: TurquoiseFloorTile;
 
 TransformComponent {}
 
 TexturedRenderable {
     Texture: config/textures/TurquoiseFloorTile.png;
-    RenderMode: GL_TRIANGLES;
+    RenderMode: GL_TRIANGLE_STRIP;
     Vertices:   0.5, 0.5, 0,
                 0.5, -0.5, 0,
+                -0.5, 0.5, 0,
                 -0.5, -0.5, 0;
     UVs:    0, 1,
             0, 0,
+            1, 1,
             1, 0;
 }
