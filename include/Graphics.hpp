@@ -12,16 +12,9 @@ namespace transitoreality {
     GLFWwindow *createWindow(int width, int height, const std::string &title);
     bool initGLEW();
     
-    namespace details {
-        const int GL_NUM_VAO_ATTRIB_POINTERS = 16;
-        GLuint genBuffer();
-        GLuint genArray();
-        GLuint genShader(GLenum shaderType);
-    }
-    
     struct VBO {
         const GLuint id;
-        VBO() : id(details::genBuffer()) {}
+        VBO();
         ~VBO();
         void bind(GLenum target=GL_ARRAY_BUFFER) const;
         
@@ -39,7 +32,7 @@ namespace transitoreality {
     
     struct VAO {
         const GLuint id;
-        VAO() : id(details::genArray()), vbos(details::GL_NUM_VAO_ATTRIB_POINTERS) {}
+        VAO();
         ~VAO();
         void bind() const;
         bool operator ==(const VAO &other) const {
@@ -76,7 +69,7 @@ namespace transitoreality {
     };
     
     struct Uniform {
-        const GLuint id;
+        const GLint id;
         Uniform(const ShaderProgram &program, const std::string &name);
         
         bool operator ==(const Uniform &other) const {

@@ -1,27 +1,23 @@
 #include <fstream>
 
 #include "IOUtils.hpp"
-#include <vector>
-#include <glob.h>
-#include <iostream>
-#include <stdio.h>
-#include <dirent.h>
-#include <sys/types.h>
+
+using namespace transitoreality;
 
 std::string transitoreality::readFileToString(const std::string &path) {
     std::string output;
-    std::ifstream stream(path);
-    
-    if (stream.fail()) {
-        throw(std::string("Failed to open file."));
-    }
-    
     std::string line;
-    
+    std::ifstream stream(path);
+    if (stream.fail()) {
+        throw IOFailure("Failed to open file.");
+    }
+
     while (std::getline(stream, line)) {
-        output += '\n';
         output += line;
+        output += '\n';
     }
     
     return output;
 }
+
+IOFailure::IOFailure(const std::string &text) : std::runtime_error(text) {}

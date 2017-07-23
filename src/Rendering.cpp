@@ -2,6 +2,10 @@
 
 using namespace transitoreality;
 
+void TransformComponent::assemble(Entity entity, const std::vector<ComponentVariable> &componentVariables) {
+    entity.addComponent<TransformComponent>();
+}
+
 Camera Camera::createIsometricCamera(float distance, glm::vec3 target) {
     float offset = sqrtf(distance / 3.0f);
     glm::vec3 cameraLocation(offset, offset, -offset);

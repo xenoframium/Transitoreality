@@ -18,11 +18,10 @@ namespace transitoreality {
         static int counter;
         
         const int id = counter++;
-        EntityManager& entityManager;
-        
+
         Entity(EntityManager& manager) : entityManager(manager) {}
-        
     public:
+        EntityManager& entityManager;
         bool operator ==(const Entity& other) const;
         
         template<class T, class... Args>

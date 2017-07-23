@@ -7,8 +7,12 @@
 using namespace transitoreality;
 namespace trlty = transitoreality;
 
+namespace {
+    const int NUM_VAO_ATTRIB_POINTERS = 16;
+}
+
 bool trlty::initGL() {
-    return glfwInit();
+    return glfwInit() != 0;
 }
 
 GLFWwindow* trlty::createWindow(int width, int height, const std::string &title) {
@@ -30,23 +34,22 @@ GLFWwindow* trlty::createWindow(int width, int height, const std::string &title)
 
 bool trlty::initGLEW() {
     glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK) {
-        return false;
-    }
-    return true;
+    return glewInit() == GLEW_OK;
 }
 
-GLuint trlty::details::genBuffer() {
+GLuint genBuffer() {
     GLuint tempID;
     glGenBuffers(1, &tempID);
     return tempID;
 }
 
-GLuint trlty::details::genArray() {
+GLuint genArray() {
     GLuint tempID;
     glGenVertexArrays(1, &tempID);
     return tempID;
 }
+
+VBO::VBO() : id(genBuffer()) {}
 
 VBO::~VBO() {
     glDeleteBuffers(1, &id);
@@ -64,6 +67,8 @@ void VAO::addAttribPointer(std::shared_ptr<VBO> vbo, GLuint index, GLint size, G
     glVertexAttribPointer(index, size, type, normalised, stride, offset);
 }
 
+VAO::VAO() : id(genArray()), vbos(NUM_VAO_ATTRIB_POINTERS) {}
+
 VAO::~VAO() {
     glDeleteVertexArrays(1, &id);
 }
@@ -73,7 +78,7 @@ void VAO::bind() const {
 }
 
 Shader::Shader(GLenum shaderType, const std::string &shaderPath) : id(glCreateShader(shaderType)), shaderType(shaderType) {
-    std::string source = readFileToString(std::move(shaderPath));
+    std::string source = readFileToString(shaderPath);
     const char* shaderSource = source.c_str();
     glShaderSource(id, 1, &shaderSource, NULL);
     glCompileShader(id);
@@ -112,7 +117,7 @@ std::shared_ptr<Texture> Texture::create(const std::string &path) {
     float* image = stbi_loadf(path.c_str(), &width, &height, &comp, STBI_default);
     
     if(!image) {
-        throw(std::string("Failed to load texture from " + path + "."));
+        throw IOFailure("Failed to load texture from: " + path);
     }
     
     GLuint id;

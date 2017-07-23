@@ -8,6 +8,7 @@
 
 #include "Entity.hpp"
 #include "Graphics.hpp"
+#include "EntityAssembler.hpp"
 
 namespace transitoreality {
     struct Camera {
@@ -24,7 +25,8 @@ namespace transitoreality {
     
     struct TransformComponent : Component {
         friend class TransformSystem;
-        
+
+        static void assemble(Entity entity, const std::vector<ComponentVariable> &componentVariables);
         Entity *parent;
         
         glm::vec3 pos;
@@ -32,7 +34,6 @@ namespace transitoreality {
         glm::quat rot;
         
         glm::mat4 modelMatrix;
-        
     private:
         unsigned int lastUpdated = -1;
     };
